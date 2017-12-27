@@ -1,11 +1,15 @@
 #include"TPersoDef.h"
 #include<string.h>
 using namespace std;
-char*** INTRAMODE_DATA = new char**[4];
-long long **MODECOUNT = new long long*[4];
+const int num=5;
+char*** INTRAMODE_DATA = new char**[num];
+long long **MODECOUNT = new long long*[num];
 map<unsigned int, int> CuMap;
-void init(){
-	for(int i=0;i<4;i++){
+FILE** LabelFile=new FILE*[num];
+FILE* ResultLog;
+const char* prefixPath=NULL;
+void init(const char* prefixFilepath){
+	for(int i=0;i<num;i++){
 		INTRAMODE_DATA[i]=new char*[35];
 		for(int j=0;j<35;j++){
 			INTRAMODE_DATA[i][j]=new char[100];
@@ -17,16 +21,22 @@ void init(){
 	CuMap[32]=1;
 	CuMap[16]=2;
 	CuMap[8]=3;
-	
+	CuMap[4]=4;
+	const char* tmp[num]={"label_64x64.txt","label_32x32.txt","label_16x16.txt","label_8x8.txt","label_4x4.txt"};
+	for(int i=0;i<num;i++){
+		string tmpPath=string(prefixFilepath)+string(tmp[i]);
+		LabelFile[i]=fopen(tmpPath.c_str(),"w+");
+	}
+
 }
-void Mkdirs() {
-	const char* prefix = "";
-	init();
-	int cuSize[4]={64,32,16,8};
-	for(int j=0;j<4;j++){
+void Mkdirs(const char* prefixFilepath) {
+	prefixPath = prefixFilepath;
+	init(prefixPath);
+	int cuSize[num]={64,32,16,8,4};
+	for(int j=0;j<num;j++){
 		char tmp[100];
 		memset(tmp,0,100);
-		sprintf(tmp,"%s%d",prefix,cuSize[j]);
+		sprintf(tmp,"%s/%d",prefixPath,cuSize[j]);
 		int rval=mkdir(tmp,S_IRWXU|S_IRGRP|S_IXGRP|S_IROTH|S_IXOTH);
 		if(rval!=0){
 			perror("mkdir error");
@@ -44,14 +54,19 @@ void Mkdirs() {
 
 void freeData(){
 	if(MODECOUNT != NULL){
-		for(int i=0;i<4;i++)
+		for(int i=0;i<num;i++){
 			delete MODECOUNT[i];
+			fclose(LabelFile[i]);
+		}
 	}
 	if(INTRAMODE_DATA != NULL){
-		for(int j=0;j<4;j++){
+		for(int j=0;j<num;j++){
 			for(int i=0; i<35; i++){
 				delete INTRAMODE_DATA[j][i];
 			}
+			delete INTRAMODE_DATA[j];
 		}
 	}
+	delete LabelFile;
+	fclose(ResultLog);
 }

@@ -13,6 +13,7 @@ objects/TAppEncCfg.r.o: \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComRectangle.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/ContextTables.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/Debug.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TAppCommon/TPersoDef.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TAppCommon/program_options_lite.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibEncoder/TEncRateCtrl.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibEncoder/../TLibCommon/CommonDef.h \
@@ -39,6 +40,7 @@ objects/TAppEncCfg.r.o: \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComRectangle.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/ContextTables.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/Debug.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TAppCommon/TPersoDef.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TAppCommon/program_options_lite.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibEncoder/TEncRateCtrl.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/app/TAppEncoder/../../../../source/Lib/TLibEncoder/../TLibCommon/CommonDef.h :

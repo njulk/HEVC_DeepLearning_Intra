@@ -2628,6 +2628,13 @@ const TChar *profileToString(const Profile::Name profile)
 
 Void TAppEncCfg::xPrintParameter()
 {
+
+#ifdef DEEP_LEARNING
+  string filename=string(prefixPath)+string("/")+m_inputFileName+string(".Result.txt");
+  ResultLog=fopen(filename.c_str(),"w+");
+  fprintf(ResultLog,"Input          File                    : %s\n", m_inputFileName.c_str());
+#endif
+
   printf("\n");
   printf("Input          File                    : %s\n", m_inputFileName.c_str()          );
   printf("Bitstream      File                    : %s\n", m_bitstreamFileName.c_str()      );

@@ -49,6 +49,8 @@
 #include "TLibCommon/TComChromaFormat.h"
 #include "math.h"
 
+
+#include "TAppCommon/TPersoDef.h"
 //! \ingroup TLibEncoder
 //! \{
 
@@ -282,8 +284,7 @@ public:
           }
           else
           {
-            printf( "\tTotal Frames |   "   "Bitrate     "  "Y-PSNR    "  "U-PSNR    "  "V-PSNR    "  "YUV-PSNR " );
-            
+            printf( "\tTotal Frames |   "   "Bitrate     "  "Y-PSNR    "  "U-PSNR    "  "V-PSNR    "  "YUV-PSNR " );  
             if (printSequenceMSE)
             {
               printf( " Y-MSE     "  "U-MSE     "  "V-MSE    "  "YUV-MSE \n" );
@@ -301,6 +302,18 @@ public:
                    getPsnr(COMPONENT_Cb) / (Double)getNumPic(),
                    getPsnr(COMPONENT_Cr) / (Double)getNumPic(),
                    PSNRyuv );
+#ifdef DEEP_LEARNING
+	  if(ResultLog!=NULL){
+		  fprintf(ResultLog,"%s%s%s%s%s%s\n", "\tTotal Frames |   ",   "Bitrate     " , "Y-PSNR    " , "U-PSNR    " , "V-PSNR    " , "YUV-PSNR " );
+		  fprintf(ResultLog, "\t %8d    %c           %12.4lf      %8.4lf     %8.4lf      %8.4lf     %8.4lf\n",
+                   getNumPic(), cDelim,
+                   getBits() * dScale,
+                   getPsnr(COMPONENT_Y) / (Double)getNumPic(),
+                   getPsnr(COMPONENT_Cb) / (Double)getNumPic(),
+                   getPsnr(COMPONENT_Cr) / (Double)getNumPic(),
+                   PSNRyuv );
+	  }
+#endif
 
             if (printSequenceMSE)
             {

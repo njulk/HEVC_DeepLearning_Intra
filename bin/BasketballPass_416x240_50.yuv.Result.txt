@@ -1,0 +1,23 @@
+Input          File                    : BasketballPass_416x240_50.yuv
+
+
+SUMMARY --------------------------------------------------------
+	Total Frames |   Bitrate     Y-PSNR    U-PSNR    V-PSNR    YUV-PSNR 
+	       10    a              1733.1200       35.5925      39.1534       39.0656      36.4802
+
+
+I Slices --------------------------------------------------------
+	Total Frames |   Bitrate     Y-PSNR    U-PSNR    V-PSNR    YUV-PSNR 
+	       10    i              1733.1200       35.5925      39.1534       39.0656      36.4802
+
+
+P Slices --------------------------------------------------------
+	Total Frames |   Bitrate     Y-PSNR    U-PSNR    V-PSNR    YUV-PSNR 
+	        0    p                   -nan          -nan         -nan          -nan         -nan
+
+
+B Slices --------------------------------------------------------
+	Total Frames |   Bitrate     Y-PSNR    U-PSNR    V-PSNR    YUV-PSNR 
+	        0    b                   -nan          -nan         -nan          -nan         -nan
+
+ Total Time:        8.953 sec.

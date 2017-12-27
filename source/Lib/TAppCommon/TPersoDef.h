@@ -9,6 +9,9 @@
 extern char*** INTRAMODE_DATA;
 extern long long **MODECOUNT;
 extern std::map<unsigned int,int> CuMap;
-void Mkdirs();
+extern FILE** LabelFile;
+extern FILE* ResultLog;
+void Mkdirs(const char* prefixFilepath);
+extern const char* prefixPath;
 void freeData();
 #endif // DEEP_LEARNING

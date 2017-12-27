@@ -32,8 +32,8 @@
  */
 
 /** \file     encmain.cpp
-    \brief    Encoder application main
-*/
+  \brief    Encoder application main
+ */
 
 #include <time.h>
 #include <iostream>
@@ -53,65 +53,74 @@
 
 int main(int argc, char* argv[])
 {
-  TAppEncTop  cTAppEncTop;
+	TAppEncTop  cTAppEncTop;
 
-  // print information
-  fprintf( stdout, "\n" );
-  fprintf( stdout, "HM software: Encoder Version [%s] (including RExt)", NV_VERSION );
-  fprintf( stdout, NVM_ONOS );
-  fprintf( stdout, NVM_COMPILEDBY );
-  fprintf( stdout, NVM_BITS );
-  fprintf( stdout, "\n\n" );
+	// print information
+	fprintf( stdout, "\n" );
+	fprintf( stdout, "HM software: Encoder Version [%s] (including RExt)", NV_VERSION );
+	fprintf( stdout, NVM_ONOS );
+	fprintf( stdout, NVM_COMPILEDBY );
+	fprintf( stdout, NVM_BITS );
+	fprintf( stdout, "\n\n" );
 
-  // create application encoder class
-  cTAppEncTop.create();
-
-  // parse configuration
-  try
-  {
-    if(!cTAppEncTop.parseCfg( argc, argv ))
-    {
-      cTAppEncTop.destroy();
-#if ENVIRONMENT_VARIABLE_DEBUG_AND_TEST
-      EnvVar::printEnvVar();
+	// create application encoder class
+	cTAppEncTop.create();
+#ifdef DEEP_LEARNING
+        if(argc==5){
+                Mkdirs("");
+        }
+        else{
+                Mkdirs(argv[5]);
+        }
 #endif
-      return 1;
-    }
-  }
-  catch (df::program_options_lite::ParseFailure &e)
-  {
-    std::cerr << "Error parsing option \""<< e.arg <<"\" with argument \""<< e.val <<"\"." << std::endl;
-    return 1;
-  }
+	// parse configuration
+	try
+	{
+		if(!cTAppEncTop.parseCfg( argc, argv ))
+		{
+			cTAppEncTop.destroy();
+#if ENVIRONMENT_VARIABLE_DEBUG_AND_TEST
+			EnvVar::printEnvVar();
+#endif
+			return 1;
+		}
+	}
+	catch (df::program_options_lite::ParseFailure &e)
+	{
+		std::cerr << "Error parsing option \""<< e.arg <<"\" with argument \""<< e.val <<"\"." << std::endl;
+		return 1;
+	}
 
 #if PRINT_MACRO_VALUES
-  printMacroSettings();
+	printMacroSettings();
 #endif
 
 #if ENVIRONMENT_VARIABLE_DEBUG_AND_TEST
-  EnvVar::printEnvVarInUse();
+	EnvVar::printEnvVarInUse();
 #endif
 
-  // starting time
-  Double dResult;
-  clock_t lBefore = clock();
- 
+	// starting time
+	Double dResult;
+	clock_t lBefore = clock();
+
+
+
+	// call encoding function
+	cTAppEncTop.encode();
+
+	// ending time
+	dResult = (Double)(clock()-lBefore) / CLOCKS_PER_SEC;
+	printf("\n Total Time: %12.3f sec.\n", dResult);
+
 #ifdef DEEP_LEARNING
-  Mkdirs();
+        fprintf(ResultLog,"\n Total Time: %12.3f sec.\n", dResult);
 #endif
-  
-
-  // call encoding function
-  cTAppEncTop.encode();
-
-  // ending time
-  dResult = (Double)(clock()-lBefore) / CLOCKS_PER_SEC;
-  printf("\n Total Time: %12.3f sec.\n", dResult);
-
-  // destroy application encoder class
-  cTAppEncTop.destroy();
-
-  return 0;
+	// destroy application encoder class
+	cTAppEncTop.destroy();
+#ifdef DEEP_LEARNING
+	freeData();
+#endif
+	return 0;
 }
 
 //! \}

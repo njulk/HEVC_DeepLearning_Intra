@@ -49,6 +49,9 @@
 #include <time.h>
 #include <math.h>
 
+//for my deep learning
+#include "TAppCommon/TPersoDef.h"
+
 #include <deque>
 using namespace std;
 
@@ -2174,14 +2177,30 @@ Void TEncGOP::printOutSummary(UInt uiNumAllPicCoded, Bool isField, const Bool pr
   const ChromaFormat chFmt = m_pcCfg->getChromaFormatIdc();
 
   //-- all
+#ifdef DEEP_LEARNING
+  fprintf(ResultLog,"%s","\n\nSUMMARY --------------------------------------------------------\n");
+#endif
+
   printf( "\n\nSUMMARY --------------------------------------------------------\n" );
   m_gcAnalyzeAll.printOut('a', chFmt, printMSEBasedSNR, printSequenceMSE, bitDepths);
+
+#ifdef DEEP_LEARNING
+  fprintf(ResultLog,"%s","\n\nI Slices --------------------------------------------------------\n");
+#endif
 
   printf( "\n\nI Slices--------------------------------------------------------\n" );
   m_gcAnalyzeI.printOut('i', chFmt, printMSEBasedSNR, printSequenceMSE, bitDepths);
 
+#ifdef DEEP_LEARNING
+  fprintf(ResultLog,"%s","\n\nP Slices --------------------------------------------------------\n");
+#endif
+
   printf( "\n\nP Slices--------------------------------------------------------\n" );
   m_gcAnalyzeP.printOut('p', chFmt, printMSEBasedSNR, printSequenceMSE, bitDepths);
+
+#ifdef DEEP_LEARNING
+  fprintf(ResultLog,"%s","\n\nB Slices --------------------------------------------------------\n");
+#endif
 
   printf( "\n\nB Slices--------------------------------------------------------\n" );
   m_gcAnalyzeB.printOut('b', chFmt, printMSEBasedSNR, printSequenceMSE, bitDepths);
