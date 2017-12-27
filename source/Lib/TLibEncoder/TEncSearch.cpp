@@ -3720,7 +3720,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 	UInt CuWidth=pcOrgYuv->getWidth(COMPONENT_Y);
 	char filePath[100];
 	memset(filePath,0,100);
-	sprintf(filePath, "%s%s%lld%s",INTRAMODE_DATA[CuMap[CuWidth]][uiBestPUMode],"/",MODECOUNT[CuMap[CuWidth]][uiBestPUMode]++,".jpg");
+	sprintf(filePath, "%s%s%d%s%lld%s",INTRAMODE_DATA[CuMap[CuWidth]][uiBestPUMode],"/",uiBestPUMode,"_",MODECOUNT[CuMap[CuWidth]][uiBestPUMode]++,".jpg");
 	fprintf(LabelFile[CuMap[CuWidth]],"%s      %d\n",filePath,uiBestPUMode);
 	unsigned char CuPixData[4096];
 	memset(CuPixData,0,4096);

@@ -22,7 +22,7 @@ void init(const char* prefixFilepath){
 	CuMap[16]=2;
 	CuMap[8]=3;
 	CuMap[4]=4;
-	const char* tmp[num]={"label_64x64.txt","label_32x32.txt","label_16x16.txt","label_8x8.txt","label_4x4.txt"};
+	const char* tmp[num]={"/label_64x64.txt","/label_32x32.txt","/label_16x16.txt","/label_8x8.txt","/label_4x4.txt"};
 	for(int i=0;i<num;i++){
 		string tmpPath=string(prefixFilepath)+string(tmp[i]);
 		LabelFile[i]=fopen(tmpPath.c_str(),"w+");
