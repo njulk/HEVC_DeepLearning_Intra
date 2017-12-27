@@ -1,0 +1,5 @@
+objects/jpeg_save.r.o: \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TAppCommon/../../../../source/Lib/TAppCommon/jpeg_save.cpp \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TAppCommon/../../../../source/Lib/TAppCommon/jpeg_save.h
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TAppCommon/../../../../source/Lib/TAppCommon/jpeg_save.cpp :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TAppCommon/../../../../source/Lib/TAppCommon/jpeg_save.h :

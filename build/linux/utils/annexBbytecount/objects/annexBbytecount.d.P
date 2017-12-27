@@ -1,0 +1,9 @@
+objects/annexBbytecount.d.o: \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/utils/annexBbytecount/../../../../source/App/utils/annexBbytecount.cpp \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/utils/annexBbytecount/../../../../source/Lib/TLibDecoder/AnnexBread.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/utils/annexBbytecount/../../../../source/Lib/TLibCommon/CommonDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/utils/annexBbytecount/../../../../source/Lib/TLibCommon/TypeDef.h
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/utils/annexBbytecount/../../../../source/App/utils/annexBbytecount.cpp :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/utils/annexBbytecount/../../../../source/Lib/TLibDecoder/AnnexBread.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/utils/annexBbytecount/../../../../source/Lib/TLibCommon/CommonDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/utils/annexBbytecount/../../../../source/Lib/TLibCommon/TypeDef.h :

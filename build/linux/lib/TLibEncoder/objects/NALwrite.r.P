@@ -1,0 +1,15 @@
+objects/NALwrite.r.o: \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibEncoder/NALwrite.cpp \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/NAL.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/CommonDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/TypeDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/TComBitStream.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibEncoder/NALwrite.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/CommonDef.h
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibEncoder/NALwrite.cpp :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/NAL.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/CommonDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/TypeDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/TComBitStream.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibEncoder/NALwrite.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/CommonDef.h :

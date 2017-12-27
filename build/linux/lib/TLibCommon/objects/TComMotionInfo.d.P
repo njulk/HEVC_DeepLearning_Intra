@@ -1,0 +1,11 @@
+objects/TComMotionInfo.d.o: \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComMotionInfo.cpp \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComMotionInfo.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/CommonDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TypeDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComMv.h
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComMotionInfo.cpp :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComMotionInfo.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/CommonDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TypeDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComMv.h :

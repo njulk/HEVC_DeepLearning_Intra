@@ -1,0 +1,23 @@
+objects/AnnexBread.r.o: \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibDecoder/AnnexBread.cpp \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibDecoder/AnnexBread.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/CommonDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TypeDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComCodingStatistics.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/CommonDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComChromaFormat.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComRectangle.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/ContextTables.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComRom.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/Debug.h
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibDecoder/AnnexBread.cpp :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibDecoder/AnnexBread.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/CommonDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TypeDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComCodingStatistics.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/CommonDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComChromaFormat.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComRectangle.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/ContextTables.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComRom.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/Debug.h :

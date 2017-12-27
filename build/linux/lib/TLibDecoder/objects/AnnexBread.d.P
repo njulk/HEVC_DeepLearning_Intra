@@ -1,0 +1,9 @@
+objects/AnnexBread.d.o: \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibDecoder/AnnexBread.cpp \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibDecoder/AnnexBread.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/CommonDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/TypeDef.h
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibDecoder/AnnexBread.cpp :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibDecoder/AnnexBread.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/CommonDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/TypeDef.h :
