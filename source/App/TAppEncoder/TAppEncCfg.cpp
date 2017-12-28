@@ -2630,8 +2630,22 @@ Void TAppEncCfg::xPrintParameter()
 {
 
 #ifdef DEEP_LEARNING
-  string filename=string(prefixPath)+string("/")+m_inputFileName+string(".Result.txt");
-  ResultLog=fopen(filename.c_str(),"w+");
+  string subFilename="";
+  for(int i=m_inputFileName.size();i>=0;i--){
+	if(m_inputFileName[i]!='/'){
+		subFilename =string(1,m_inputFileName[i]) + subFilename;
+	}
+	else{
+		break;
+	}
+  }
+  char filename[200];
+  memset(filename,0,100);
+  sprintf(filename,"%s%s%s%s",prefixPath,"/",subFilename.c_str(),"_Result.txt");
+  ResultLog=fopen(filename,"w+");
+  if(ResultLog==NULL){
+	cout<<"open file"<<filename<<"fails"<<endl;
+  }
   fprintf(ResultLog,"Input          File                    : %s\n", m_inputFileName.c_str());
 #endif
 
