@@ -3718,10 +3718,19 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 #ifdef DEEP_LEARNING	
 	const Pel* org = pcOrgYuv->getAddr(COMPONENT_Y);
 	UInt CuWidth=pcOrgYuv->getWidth(COMPONENT_Y);
+	int SaveType = 0;
+	if (IndexCurFrame > NumSeperation)
+	{
+		SaveType = 1;
+	}
+	else
+	{
+		SaveType = 0;
+	}
 	char filePath[100];
 	memset(filePath,0,100);
-	sprintf(filePath, "%s%s%d%s%lld%s",INTRAMODE_DATA[CuMap[CuWidth]][uiBestPUMode],"/",uiBestPUMode,"_",MODECOUNT[CuMap[CuWidth]][uiBestPUMode]++,".jpg");
-	fprintf(LabelFile[CuMap[CuWidth]],"%s      %d\n",filePath,uiBestPUMode);
+	sprintf(filePath, "%s%s%d%s%lld%s",INTRAMODE_DATA[SaveType][CuMap[CuWidth]][uiBestPUMode],"/",uiBestPUMode,"_",MODECOUNT[SaveType][CuMap[CuWidth]][uiBestPUMode]++,".jpg");
+	fprintf(LabelFile[SaveType][CuMap[CuWidth]],"%s      %d\n",filePath,uiBestPUMode);
 	unsigned char CuPixData[4096];
 	memset(CuPixData,0,4096);
 	for (int i = 0; i < pcOrgYuv->getHeight(COMPONENT_Y); i++) {

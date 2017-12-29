@@ -1267,6 +1267,11 @@ Void TEncGOP::compressGOP( Int iPOCLast, Int iNumPicRcvd, TComList<TComPic*>& rc
 
   for ( Int iGOPid=0; iGOPid < m_iGopSize; iGOPid++ )
   {
+
+#ifdef DEEP_LEARNING
+	  IndexCurFrame++;
+#endif // DEEP_LEARNING
+
     if (m_pcCfg->getEfficientFieldIRAPEnabled())
     {
       iGOPid=effFieldIRAPMap.adjustGOPid(iGOPid);
@@ -2144,6 +2149,10 @@ Void TEncGOP::compressGOP( Int iPOCLast, Int iNumPicRcvd, TComList<TComPic*>& rc
         pcPic->releaseEncoderSourceImageData();
       }
     }
+
+
+
+
 
 #endif
   } // iGOPid-loop

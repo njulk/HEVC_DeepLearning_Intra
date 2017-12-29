@@ -6,12 +6,14 @@
 #include <sys/stat.h>
 #include<map>
 #include<errno.h>
-extern char*** INTRAMODE_DATA;
-extern long long **MODECOUNT;
+extern char**** INTRAMODE_DATA;
+extern long long ***MODECOUNT;
 extern std::map<unsigned int,int> CuMap;
-extern FILE** LabelFile;
+extern FILE*** LabelFile;
 extern FILE* ResultLog;
 void Mkdirs(const char* prefixFilepath);
 extern const char* prefixPath;
+extern int IndexCurFrame;
+extern int NumSeperation;
 void freeData();
 #endif // DEEP_LEARNING
