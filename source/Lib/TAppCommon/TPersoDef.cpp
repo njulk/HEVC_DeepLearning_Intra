@@ -1,5 +1,6 @@
 #include"TPersoDef.h"
 #include<string.h>
+#include"unistd.h"
 using namespace std;
 int IndexCurFrame = 0;
 const int num = 4;
@@ -11,6 +12,7 @@ map<unsigned int, int> CuMap;
 FILE*** LabelFile = new FILE**[numTestTrain];
 FILE* ResultLog;
 const char* prefixPath = NULL;
+int createDirectory(const char* directoryPath, mode_t mode);
 void init(const char* prefixFilepath) {
 	for (int x = 0; x < numTestTrain; x++) {
 		INTRAMODE_DATA[x] = new char**[num];
@@ -23,6 +25,7 @@ void init(const char* prefixFilepath) {
 			}
 			MODECOUNT[x][i] = new long long[35];
 		}
+		LabelFile[x]=new FILE*[num];
 	}
 	CuMap[64] = 0;
 	CuMap[32] = 1;
@@ -34,9 +37,15 @@ void init(const char* prefixFilepath) {
 		string tmpPath = string(prefixFilepath) + string(tmp_train[i]);
 		createDirectory(tmpPath.c_str(), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 		LabelFile[0][i] = fopen(tmpPath.c_str(), "w+");
+		if(LabelFile[0][i]==NULL){
+			perror(tmpPath.c_str());
+		}
 		tmpPath = string(prefixFilepath) + string(tmp_test[i]);
 		createDirectory(tmpPath.c_str(), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 		LabelFile[1][i] = fopen(tmpPath.c_str(), "w+");
+		if(LabelFile[1][i]==NULL){
+                        perror(tmpPath.c_str());
+                }
 	}
 
 }
@@ -69,7 +78,7 @@ void Mkdirs(const char* prefixFilepath) {
 	prefixPath = prefixFilepath;
 	init(prefixPath);
 	int cuSize[num] = { 64,32,16,8 };
-	char* testTrain[2] = { "train","test" };
+	const char* testTrain[2] = { "train","test" };
 	for (int x = 0; x < 2; x++) {
 		for (int j = 0; j < num; j++) {
 			char tmp[100];
@@ -77,7 +86,7 @@ void Mkdirs(const char* prefixFilepath) {
 			sprintf(tmp, "%s/%s/%d", prefixPath, testTrain[x], cuSize[j]);
 			int rval = mkdir(tmp, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 			if (rval != 0) {
-				perror("mkdir error");
+				perror(tmp);
 			}
 			for (int i = 0; i < 35; i++) {
 				char str[100];
@@ -85,7 +94,7 @@ void Mkdirs(const char* prefixFilepath) {
 				sprintf(str, "%s%s%d", tmp, "/", i);
 				mkdir(str, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 				memcpy(INTRAMODE_DATA[x][j][i], str, 100);
-				MODECOUNT[j][i] = 0;
+				MODECOUNT[x][j][i] = 0;
 			}
 		}
 	}
