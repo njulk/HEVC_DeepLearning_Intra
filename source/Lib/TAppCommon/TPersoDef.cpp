@@ -35,13 +35,13 @@ void init(const char* prefixFilepath) {
 	const char* tmp_test[num] = { "/test/test_label_64x64.txt","/test/test_label_32x32.txt","/test/test_label_16x16.txt","/test/test_label_8x8.txt" };
 	for (int i = 0; i < num; i++) {
 		string tmpPath = string(prefixFilepath) + string(tmp_train[i]);
-		createDirectory(tmpPath.c_str(), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+		createDirectory(tmpPath.c_str(), 0666);
 		LabelFile[0][i] = fopen(tmpPath.c_str(), "w+");
 		if(LabelFile[0][i]==NULL){
 			perror(tmpPath.c_str());
 		}
 		tmpPath = string(prefixFilepath) + string(tmp_test[i]);
-		createDirectory(tmpPath.c_str(), S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+		createDirectory(tmpPath.c_str(), 0666);
 		LabelFile[1][i] = fopen(tmpPath.c_str(), "w+");
 		if(LabelFile[1][i]==NULL){
                         perror(tmpPath.c_str());
@@ -84,7 +84,7 @@ void Mkdirs(const char* prefixFilepath) {
 			char tmp[100];
 			memset(tmp, 0, 100);
 			sprintf(tmp, "%s/%s/%d", prefixPath, testTrain[x], cuSize[j]);
-			int rval = mkdir(tmp, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+			int rval = mkdir(tmp, 0666);
 			if (rval != 0) {
 				perror(tmp);
 			}
@@ -92,7 +92,7 @@ void Mkdirs(const char* prefixFilepath) {
 				char str[100];
 				memset(str, 0, 100);
 				sprintf(str, "%s%s%d", tmp, "/", i);
-				mkdir(str, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+				mkdir(str, 0666);
 				memcpy(INTRAMODE_DATA[x][j][i], str, 100);
 				MODECOUNT[x][j][i] = 0;
 			}

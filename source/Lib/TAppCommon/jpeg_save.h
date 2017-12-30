@@ -3,6 +3,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<iostream>
+#include<sys/types.h>
+#include<sys/stat.h>
 extern "C" {
 #include <jpeglib.h>
 }

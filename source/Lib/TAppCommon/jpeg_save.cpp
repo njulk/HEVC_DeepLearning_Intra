@@ -114,4 +114,8 @@ void GeneJpegFile(const char* jpegFileName, unsigned char* inputData,
 
 	/* After finish_compress, we can close the output file. */
 	fclose(outfile);
+	chmod(jpegFileName,00777);
+
+
+
 }
