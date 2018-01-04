@@ -42,10 +42,6 @@ Classifier::Classifier(const string& model_file,
 		<< "Number of labels is different from the output layer dimension.";
 }
 
-static bool PairCompare(const std::pair<float, int>& lhs,
-	const std::pair<float, int>& rhs) {
-	return lhs.first > rhs.first;
-}
 
 
 
