@@ -3645,15 +3645,51 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
     }
     for ( UInt uiMode = 0; uiMode < max; uiMode++)
 #else
-#ifndef DEEP_CLASSIFY
-    for( UInt uiMode = 0; uiMode < numModesForFullRD; uiMode++ )
+#ifdef DEEP_CLASSIFY
+    for( UInt uiMode = 0; uiMode < 1; uiMode++ )
+#else
+	for (UInt uiMode = 0; uiMode < numModesForFullRD; uiMode++)
 #endif
 #endif
-#ifndef DEEP_CLASSIFY
     {
-      // set luma prediction mode
-      UInt uiOrgMode = uiRdModeList[uiMode];
-
+#ifdef DEEP_CLASSIFY
+		const Pel* org = pcOrgYuv->getAddr(COMPONENT_Y);
+		UInt CuWidth = pcOrgYuv->getWidth(COMPONENT_Y);
+		const char* filePath = "tmp.jpg";
+		unsigned char CuPixData[4096];
+		memset(CuPixData, 0, 4096);
+		for (int i = 0; i < pcOrgYuv->getHeight(COMPONENT_Y); i++) {
+			for (int j = 0; j < pcOrgYuv->getWidth(COMPONENT_Y); j++) {
+				CuPixData[i*CuWidth + j] = *(org + j);
+			}
+			org += pcOrgYuv->getStride(COMPONENT_Y);
+		}
+		GeneJpegFile(filePath, CuPixData, CuWidth, CuWidth, 1, 80);
+		Prediction ModeResult;
+		switch (CuWidth)
+		{
+		case 8:
+			ModeResult = getPrediction(classifier8, string(filePath));
+			break;
+		case 16:
+			ModeResult = getPrediction(classifier16, string(filePath));
+			break;
+		case 32:
+			ModeResult = getPrediction(classifier32, string(filePath));
+			break;
+		case 64:
+			ModeResult = getPrediction(classifier64, string(filePath));
+			break;
+		default:
+			break;
+		}
+		UInt uiPredictPUMode = stoi(ModeResult.first);
+		UInt uiOrgMode = uiPredictPUMode;
+#else
+	 // set luma prediction mode
+	  UInt uiOrgMode = uiRdModeList[uiMode];
+#endif
+ 
       pcCU->setIntraDirSubParts ( CHANNEL_TYPE_LUMA, uiOrgMode, uiPartOffset, uiDepth + uiInitTrDepth );
 
       DEBUG_STRING_NEW(sMode)
@@ -3718,9 +3754,10 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
       }
 #endif
     } // Mode loop
-#endif
+
 //for my deeplearning add some code
-#ifdef DEEP_LEARNING	
+#ifdef DEEP_LEARNING
+#ifndef DEEP_CLASSIFY
 	const Pel* org = pcOrgYuv->getAddr(COMPONENT_Y);
 	UInt CuWidth=pcOrgYuv->getWidth(COMPONENT_Y);
 	int SaveType = 0;
@@ -3746,86 +3783,8 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 		org += pcOrgYuv->getStride(COMPONENT_Y);
 	}
 	GeneJpegFile(filePath,CuPixData,CuWidth,CuWidth,1,80);
-#ifdef DEEP_CLASSIFY
-	Prediction ModeResult;
-	switch (CuWidth)
-	{
-		case 8:
-			ModeResult = getPrediction(classifier8, string(filePath));
-			break;
-		case 16:
-			ModeResult = getPrediction(classifier16, string(filePath));
-			break;
-		case 32:
-			ModeResult = getPrediction(classifier32, string(filePath));
-			break;
-		case 64:
-			ModeResult = getPrediction(classifier64, string(filePath));
-			break;
-		default:
-			break;
-	}
-	UInt uiPredictPUMode=stoi(ModeResult.first);
-	pcCU->setIntraDirSubParts(CHANNEL_TYPE_LUMA, uiPredictPUMode, uiPartOffset, uiDepth + uiInitTrDepth);
-
-	DEBUG_STRING_NEW(sMode)
-		// set context models
-		m_pcRDGoOnSbacCoder->load(m_pppcRDSbacCoder[uiDepth][CI_CURR_BEST]);
-
-	// determine residual for partition
-	Distortion uiPUDistY = 0;
-	Double     dPUCost = 0.0;
-#if HHI_RQT_INTRA_SPEEDUP
-	xRecurIntraCodingLumaQT(pcOrgYuv, pcPredYuv, pcResiYuv, resiLumaPU, uiPUDistY, true, dPUCost, tuRecurseWithPU DEBUG_STRING_PASS_INTO(sMode));
-#else
-	xRecurIntraCodingLumaQT(pcOrgYuv, pcPredYuv, pcResiYuv, resiLumaPU, uiPUDistY, dPUCost, tuRecurseWithPU DEBUG_STRING_PASS_INTO(sMode));
 #endif
-
-#if DEBUG_INTRA_SEARCH_COSTS
-	std::cout << "2nd pass [luma,chroma] mode [" << Int(pcCU->getIntraDir(CHANNEL_TYPE_LUMA, uiPartOffset)) << "," << Int(pcCU->getIntraDir(CHANNEL_TYPE_CHROMA, uiPartOffset)) << "] cost = " << dPUCost << "\n";
 #endif
-	if (dPUCost < dBestPUCost)
-	{
-		DEBUG_STRING_SWAP(sPU, sMode)
-#if HHI_RQT_INTRA_SPEEDUP_MOD
-			uiSecondBestMode = uiBestPUMode;
-		dSecondBestPUCost = dBestPUCost;
-#endif
-		uiBestPUMode = uiPredictPUMode;
-		uiBestPUDistY = uiPUDistY;
-		dBestPUCost = dPUCost;
-
-		xSetIntraResultLumaQT(pcRecoYuv, tuRecurseWithPU);
-
-		if (pps.getPpsRangeExtension().getCrossComponentPredictionEnabledFlag())
-		{
-			const Int xOffset = tuRecurseWithPU.getRect(COMPONENT_Y).x0;
-			const Int yOffset = tuRecurseWithPU.getRect(COMPONENT_Y).y0;
-			for (UInt storedResidualIndex = 0; storedResidualIndex < NUMBER_OF_STORED_RESIDUAL_TYPES; storedResidualIndex++)
-			{
-				if (bMaintainResidual[storedResidualIndex])
-				{
-					xStoreCrossComponentPredictionResult(resiLuma[storedResidualIndex], resiLumaPU[storedResidualIndex], tuRecurseWithPU, xOffset, yOffset, MAX_CU_SIZE, MAX_CU_SIZE);
-				}
-			}
-		}
-
-		UInt uiQPartNum = tuRecurseWithPU.GetAbsPartIdxNumParts();
-
-		::memcpy(m_puhQTTempTrIdx, pcCU->getTransformIdx() + uiPartOffset, uiQPartNum * sizeof(UChar));
-		for (UInt component = 0; component < numberValidComponents; component++)
-		{
-			const ComponentID compID = ComponentID(component);
-			::memcpy(m_puhQTTempCbf[compID], pcCU->getCbf(compID) + uiPartOffset, uiQPartNum * sizeof(UChar));
-			::memcpy(m_puhQTTempTransformSkipFlag[compID], pcCU->getTransformSkip(compID) + uiPartOffset, uiQPartNum * sizeof(UChar));
-		}
-	}
-
-#endif // DEEP_CLASSIFY
-
-#endif
-
-
 #if HHI_RQT_INTRA_SPEEDUP
 #if HHI_RQT_INTRA_SPEEDUP_MOD
     for( UInt ui =0; ui < 2; ++ui )
