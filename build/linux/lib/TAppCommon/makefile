@@ -13,8 +13,8 @@ SRC_DIR3		=
 SRC_DIR4		=
 
 
-USER_INC_DIRS	= -I$(SRC_DIR)
-USER_LIB_DIRS	=
+USER_INC_DIRS	= -I$(SRC_DIR) -I/njulk/caffe/include/ -I/usr/local/cuda/include/
+USER_LIB_DIRS	= -lopencv_highgui -lopencv_core -lopencv_imgproc -lglog -lboost_system -L/njulk/caffe/build/lib/ -lcaffe
 
 ifeq ($(HIGHBITDEPTH), 1)
 HBD=HighBitDepth
