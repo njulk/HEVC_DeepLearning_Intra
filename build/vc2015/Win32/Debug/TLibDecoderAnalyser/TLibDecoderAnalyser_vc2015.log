@@ -1,0 +1,14 @@
+﻿  TDecTop.cpp
+  TDecSlice.cpp
+  TDecSbac.cpp
+  TDecGop.cpp
+  TDecEntropy.cpp
+  TDecCu.cpp
+  TDecCAVLC.cpp
+  TDecBinCoderCABAC.cpp
+  SyntaxElementParser.cpp
+  SEIread.cpp
+  NALread.cpp
+  AnnexBread.cpp
+  正在生成代码...
+  TLibDecoderAnalyser_vc2015.vcxproj -> C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\build\\vc2015\Win32\Debug\TLibDecoderAnalyser\TLibDecoderAnalyser.lib

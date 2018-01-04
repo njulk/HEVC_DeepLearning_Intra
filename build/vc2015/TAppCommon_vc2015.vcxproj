@@ -147,11 +147,13 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\Lib\TAppCommon\classification.cpp" />
     <ClCompile Include="..\..\source\Lib\TAppCommon\jpeg_save.cpp" />
     <ClCompile Include="..\..\source\Lib\TAppCommon\program_options_lite.cpp" />
     <ClCompile Include="..\..\source\Lib\TAppCommon\TPersoDef.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\Lib\TAppCommon\classification.h" />
     <ClInclude Include="..\..\source\Lib\TAppCommon\jpeg_save.h" />
     <ClInclude Include="..\..\source\Lib\TAppCommon\program_options_lite.h" />
     <ClInclude Include="..\..\source\Lib\TAppCommon\TPersoDef.h" />

@@ -3565,6 +3565,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
       const Bool bUseHadamard=pcCU->getCUTransquantBypass(0) == 0;
       m_pcRdCost->setDistParam(distParam, sps.getBitDepth(CHANNEL_TYPE_LUMA), piOrg, uiStride, piPred, uiStride, puRect.width, puRect.height, bUseHadamard);
       distParam.bApplyWeight = false;
+#ifndef DEEP_CLASSIFY
       for( Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++ )
       {
         UInt       uiMode = modeIdx;
@@ -3615,6 +3616,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
           }
         }
       }
+#endif
     }
     else
     {
@@ -3643,8 +3645,11 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
     }
     for ( UInt uiMode = 0; uiMode < max; uiMode++)
 #else
+#ifndef DEEP_CLASSIFY
     for( UInt uiMode = 0; uiMode < numModesForFullRD; uiMode++ )
 #endif
+#endif
+#ifndef DEEP_CLASSIFY
     {
       // set luma prediction mode
       UInt uiOrgMode = uiRdModeList[uiMode];
@@ -3713,7 +3718,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
       }
 #endif
     } // Mode loop
-
+#endif
 //for my deeplearning add some code
 #ifdef DEEP_LEARNING	
 	const Pel* org = pcOrgYuv->getAddr(COMPONENT_Y);
@@ -3741,6 +3746,83 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 		org += pcOrgYuv->getStride(COMPONENT_Y);
 	}
 	GeneJpegFile(filePath,CuPixData,CuWidth,CuWidth,1,80);
+#ifdef DEEP_CLASSIFY
+	Prediction ModeResult;
+	switch (CuWidth)
+	{
+		case 8:
+			ModeResult = getPrediction(classifier8, string(filePath));
+			break;
+		case 16:
+			ModeResult = getPrediction(classifier16, string(filePath));
+			break;
+		case 32:
+			ModeResult = getPrediction(classifier32, string(filePath));
+			break;
+		case 64:
+			ModeResult = getPrediction(classifier64, string(filePath));
+			break;
+		default:
+			break;
+	}
+	UInt uiPredictPUMode=stoi(ModeResult.first);
+	pcCU->setIntraDirSubParts(CHANNEL_TYPE_LUMA, uiPredictPUMode, uiPartOffset, uiDepth + uiInitTrDepth);
+
+	DEBUG_STRING_NEW(sMode)
+		// set context models
+		m_pcRDGoOnSbacCoder->load(m_pppcRDSbacCoder[uiDepth][CI_CURR_BEST]);
+
+	// determine residual for partition
+	Distortion uiPUDistY = 0;
+	Double     dPUCost = 0.0;
+#if HHI_RQT_INTRA_SPEEDUP
+	xRecurIntraCodingLumaQT(pcOrgYuv, pcPredYuv, pcResiYuv, resiLumaPU, uiPUDistY, true, dPUCost, tuRecurseWithPU DEBUG_STRING_PASS_INTO(sMode));
+#else
+	xRecurIntraCodingLumaQT(pcOrgYuv, pcPredYuv, pcResiYuv, resiLumaPU, uiPUDistY, dPUCost, tuRecurseWithPU DEBUG_STRING_PASS_INTO(sMode));
+#endif
+
+#if DEBUG_INTRA_SEARCH_COSTS
+	std::cout << "2nd pass [luma,chroma] mode [" << Int(pcCU->getIntraDir(CHANNEL_TYPE_LUMA, uiPartOffset)) << "," << Int(pcCU->getIntraDir(CHANNEL_TYPE_CHROMA, uiPartOffset)) << "] cost = " << dPUCost << "\n";
+#endif
+	if (dPUCost < dBestPUCost)
+	{
+		DEBUG_STRING_SWAP(sPU, sMode)
+#if HHI_RQT_INTRA_SPEEDUP_MOD
+			uiSecondBestMode = uiBestPUMode;
+		dSecondBestPUCost = dBestPUCost;
+#endif
+		uiBestPUMode = uiPredictPUMode;
+		uiBestPUDistY = uiPUDistY;
+		dBestPUCost = dPUCost;
+
+		xSetIntraResultLumaQT(pcRecoYuv, tuRecurseWithPU);
+
+		if (pps.getPpsRangeExtension().getCrossComponentPredictionEnabledFlag())
+		{
+			const Int xOffset = tuRecurseWithPU.getRect(COMPONENT_Y).x0;
+			const Int yOffset = tuRecurseWithPU.getRect(COMPONENT_Y).y0;
+			for (UInt storedResidualIndex = 0; storedResidualIndex < NUMBER_OF_STORED_RESIDUAL_TYPES; storedResidualIndex++)
+			{
+				if (bMaintainResidual[storedResidualIndex])
+				{
+					xStoreCrossComponentPredictionResult(resiLuma[storedResidualIndex], resiLumaPU[storedResidualIndex], tuRecurseWithPU, xOffset, yOffset, MAX_CU_SIZE, MAX_CU_SIZE);
+				}
+			}
+		}
+
+		UInt uiQPartNum = tuRecurseWithPU.GetAbsPartIdxNumParts();
+
+		::memcpy(m_puhQTTempTrIdx, pcCU->getTransformIdx() + uiPartOffset, uiQPartNum * sizeof(UChar));
+		for (UInt component = 0; component < numberValidComponents; component++)
+		{
+			const ComponentID compID = ComponentID(component);
+			::memcpy(m_puhQTTempCbf[compID], pcCU->getCbf(compID) + uiPartOffset, uiQPartNum * sizeof(UChar));
+			::memcpy(m_puhQTTempTransformSkipFlag[compID], pcCU->getTransformSkip(compID) + uiPartOffset, uiQPartNum * sizeof(UChar));
+		}
+	}
+
+#endif // DEEP_CLASSIFY
+
 #endif
 
 

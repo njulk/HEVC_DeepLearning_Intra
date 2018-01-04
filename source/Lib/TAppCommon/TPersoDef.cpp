@@ -1,5 +1,5 @@
 #include"TPersoDef.h"
-#include<string.h>
+
 #include"unistd.h"
 using namespace std;
 int IndexCurFrame = 0;
@@ -125,3 +125,11 @@ void freeData() {
 	delete LabelFile;
 	fclose(ResultLog);
 }
+
+
+#ifdef DEEP_CLASSIFY
+Classifier* classifier8=new Classifier("8_SlideEditing_deploy.prototxt","8_iter_220000.caffemodel","8mean.binaryproto","label.txt");
+Classifier* classifier16= new Classifier("16_SlideEditing_deploy.prototxt", "16_iter_10800.caffemodel", "16mean.binaryproto", "label.txt");
+Classifier* classifier32 = new Classifier("32_SlideEditing_deploy.prototxt", "32_iter_100000.caffemodel", "32mean.binaryproto", "label.txt");
+Classifier* classifier64 = new Classifier("64_SlideEditing_deploy.prototxt", "64_iter_10800.caffemodel", "64mean.binaryproto", "label.txt");
+#endif

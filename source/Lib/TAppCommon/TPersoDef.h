@@ -6,6 +6,8 @@
 #include <sys/stat.h>
 #include<map>
 #include<errno.h>
+#include<string>
+using namespace std;
 extern char**** INTRAMODE_DATA;
 extern long long ***MODECOUNT;
 extern std::map<unsigned int,int> CuMap;
@@ -17,3 +19,12 @@ extern int IndexCurFrame;
 extern int NumSeperation;
 void freeData();
 #endif // DEEP_LEARNING
+
+#include"TAppCommon/classification.h"
+#ifdef DEEP_CLASSIFY
+extern Classifier* classifier8;
+extern Classifier* classifier16;
+extern Classifier* classifier32;
+extern Classifier* classifier64;
+#endif // DEEP_CLASSIFY
+
