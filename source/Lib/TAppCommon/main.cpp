@@ -1,5 +1,2 @@
-#include"jpeg_save.h"
-int main()
-{
-	return 0;
-}
+#include"classification.h"
+int main(){}

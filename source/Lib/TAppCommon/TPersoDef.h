@@ -7,6 +7,7 @@
 #include<map>
 #include<errno.h>
 #include<string>
+#include"TAppCommon/classification.h"
 using namespace std;
 extern char**** INTRAMODE_DATA;
 extern long long ***MODECOUNT;
@@ -20,7 +21,6 @@ extern int NumSeperation;
 void freeData();
 #endif // DEEP_LEARNING
 
-#include"TAppCommon/classification.h"
 #ifdef DEEP_CLASSIFY
 extern Classifier* classifier8;
 extern Classifier* classifier16;

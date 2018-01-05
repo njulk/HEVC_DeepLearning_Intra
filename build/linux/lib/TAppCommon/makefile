@@ -41,6 +41,7 @@ OBJS          	= \
 		$(OBJ_DIR)/program_options_lite.o \
 		$(OBJ_DIR)/jpeg_save.o \
 		$(OBJ_DIR)/TPersoDef.o \
+		$(OBJ_DIR)/classification.o\
 
 LIBS				= -lpthread
 

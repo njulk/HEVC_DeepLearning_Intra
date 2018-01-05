@@ -1,4 +1,3 @@
-#pragma once
 #ifndef DEEP_CLASSIFY
 #define DEEP_CLASSIFY
 #include <caffe/caffe.hpp>
@@ -7,12 +6,13 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <algorithm>
 #include <iosfwd>
-#include <memory>
 #include <string>
 #include <utility>
 #include <vector>
-using namespace caffe;  // NOLINT(build/namespaces)
+#include<memory.h>
 using std::string;
+//using namespace std;
+using namespace caffe;
 typedef std::pair<string, float> Prediction;
 
 class Classifier {
@@ -35,17 +35,13 @@ private:
 		std::vector<cv::Mat>* input_channels);
 
 private:
-	shared_ptr<Net<float> > net_;
+        caffe::shared_ptr<Net<float>> net_;
 	cv::Size input_geometry_;
 	int num_channels_;
 	cv::Mat mean_;
 	std::vector<string> labels_;
 };
 
-Classifier* getClassifier(const string& model_file,
-	const string& trained_file,
-	const string& mean_file,
-	const string& label_file);
 
 Prediction getPrediction(Classifier* classifier, string file);
 
