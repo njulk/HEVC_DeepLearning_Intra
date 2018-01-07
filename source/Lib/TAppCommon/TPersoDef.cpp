@@ -128,8 +128,8 @@ void freeData() {
 
 
 #ifdef DEEP_CLASSIFY
-Classifier* classifier8=new Classifier("8_SlideEditing_deploy.prototxt","8_iter_220000.caffemodel","8mean.binaryproto","label.txt");
-Classifier* classifier16= new Classifier("16_SlideEditing_deploy.prototxt", "16_iter_10800.caffemodel", "16mean.binaryproto", "label.txt");
-Classifier* classifier32 = new Classifier("32_SlideEditing_deploy.prototxt", "32_iter_100000.caffemodel", "32mean.binaryproto", "label.txt");
-Classifier* classifier64 = new Classifier("64_SlideEditing_deploy.prototxt", "64_iter_10800.caffemodel", "64mean.binaryproto", "label.txt");
+Classifier* classifier8=new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing8_deploy.prototxt","/njulk/HEVC/sequences/prototxt/8_iter_250000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_8x8_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
+Classifier* classifier16= new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing16_deploy.prototxt","/njulk/HEVC/sequences/prototxt/16_iter_10000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_16x16_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
+Classifier* classifier32 = new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing32_deploy.prototxt","/njulk/HEVC/sequences/prototxt/32_iter_5000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_32x32_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
+Classifier* classifier64 = new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing64_deploy.prototxt","/njulk/HEVC/sequences/prototxt/64_iter_5000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_64x64_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
 #endif

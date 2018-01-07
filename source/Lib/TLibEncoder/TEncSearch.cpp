@@ -3683,6 +3683,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 		default:
 			break;
 		}
+		remove(filePath);
 		UInt uiPredictPUMode = stoi(ModeResult.first);
 		UInt uiOrgMode = uiPredictPUMode;
 #else

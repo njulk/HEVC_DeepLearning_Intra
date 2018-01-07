@@ -13,7 +13,7 @@ SRC_DIR3		=
 SRC_DIR4		=
 
 
-USER_INC_DIRS	= -I$(SRC_DIR)
+USER_INC_DIRS	= -I$(SRC_DIR) -I/njulk/caffe-master/include/ -I/usr/local/cuda/include/
 USER_LIB_DIRS	=
 
 ifeq ($(HIGHBITDEPTH), 1)

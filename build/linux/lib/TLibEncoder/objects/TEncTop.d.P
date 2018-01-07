@@ -66,6 +66,46 @@ objects/TEncTop.d.o: \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/TComRectangle.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/TComHash.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TAppCommon/TPersoDef.h \
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TAppCommon/classification.h \
+ /njulk/caffe-master/include/caffe/caffe.hpp \
+ /njulk/caffe-master/include/caffe/blob.hpp \
+ /njulk/caffe-master/include/caffe/common.hpp \
+ /njulk/caffe-master/include/caffe/util/device_alternate.hpp \
+ /usr/local/cuda/include/cublas_v2.h /usr/local/cuda/include/cublas_api.h \
+ /usr/local/cuda/include/driver_types.h \
+ /usr/local/cuda/include/host_defines.h \
+ /usr/local/cuda/include/cuComplex.h \
+ /usr/local/cuda/include/vector_types.h \
+ /usr/local/cuda/include/builtin_types.h \
+ /usr/local/cuda/include/device_types.h \
+ /usr/local/cuda/include/surface_types.h \
+ /usr/local/cuda/include/texture_types.h \
+ /usr/local/cuda/include/cuda_fp16.h \
+ /usr/local/cuda/include/library_types.h /usr/local/cuda/include/cuda.h \
+ /usr/local/cuda/include/cuda_runtime.h \
+ /usr/local/cuda/include/host_config.h \
+ /usr/local/cuda/include/channel_descriptor.h \
+ /usr/local/cuda/include/cuda_runtime_api.h \
+ /usr/local/cuda/include/cuda_device_runtime_api.h \
+ /usr/local/cuda/include/driver_functions.h \
+ /usr/local/cuda/include/vector_functions.h \
+ /usr/local/cuda/include/vector_functions.hpp \
+ /usr/local/cuda/include/curand.h /usr/local/cuda/include/driver_types.h \
+ /njulk/caffe-master/include/caffe/proto/caffe.pb.h \
+ /njulk/caffe-master/include/caffe/syncedmem.hpp \
+ /njulk/caffe-master/include/caffe/filler.hpp \
+ /njulk/caffe-master/include/caffe/util/math_functions.hpp \
+ /njulk/caffe-master/include/caffe/util/mkl_alternate.hpp \
+ /njulk/caffe-master/include/caffe/layer.hpp \
+ /njulk/caffe-master/include/caffe/layer_factory.hpp \
+ /njulk/caffe-master/include/caffe/net.hpp \
+ /njulk/caffe-master/include/caffe/parallel.hpp \
+ /njulk/caffe-master/include/caffe/solver.hpp \
+ /njulk/caffe-master/include/caffe/solver_factory.hpp \
+ /njulk/caffe-master/include/caffe/util/benchmark.hpp \
+ /njulk/caffe-master/include/caffe/util/io.hpp \
+ /njulk/caffe-master/include/caffe/util/format.hpp \
+ /njulk/caffe-master/include/caffe/util/upgrade_proto.hpp \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TAppCommon/jpeg_save.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibEncoder/TEncRateCtrl.h \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibEncoder/../TLibCommon/CommonDef.h \
@@ -147,6 +187,46 @@ objects/TEncTop.d.o: \
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/TComRectangle.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibCommon/TComHash.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TAppCommon/TPersoDef.h :
+ /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TAppCommon/classification.h :
+ /njulk/caffe-master/include/caffe/caffe.hpp :
+ /njulk/caffe-master/include/caffe/blob.hpp :
+ /njulk/caffe-master/include/caffe/common.hpp :
+ /njulk/caffe-master/include/caffe/util/device_alternate.hpp :
+ /usr/local/cuda/include/cublas_v2.h /usr/local/cuda/include/cublas_api.h :
+ /usr/local/cuda/include/driver_types.h :
+ /usr/local/cuda/include/host_defines.h :
+ /usr/local/cuda/include/cuComplex.h :
+ /usr/local/cuda/include/vector_types.h :
+ /usr/local/cuda/include/builtin_types.h :
+ /usr/local/cuda/include/device_types.h :
+ /usr/local/cuda/include/surface_types.h :
+ /usr/local/cuda/include/texture_types.h :
+ /usr/local/cuda/include/cuda_fp16.h :
+ /usr/local/cuda/include/library_types.h /usr/local/cuda/include/cuda.h :
+ /usr/local/cuda/include/cuda_runtime.h :
+ /usr/local/cuda/include/host_config.h :
+ /usr/local/cuda/include/channel_descriptor.h :
+ /usr/local/cuda/include/cuda_runtime_api.h :
+ /usr/local/cuda/include/cuda_device_runtime_api.h :
+ /usr/local/cuda/include/driver_functions.h :
+ /usr/local/cuda/include/vector_functions.h :
+ /usr/local/cuda/include/vector_functions.hpp :
+ /usr/local/cuda/include/curand.h /usr/local/cuda/include/driver_types.h :
+ /njulk/caffe-master/include/caffe/proto/caffe.pb.h :
+ /njulk/caffe-master/include/caffe/syncedmem.hpp :
+ /njulk/caffe-master/include/caffe/filler.hpp :
+ /njulk/caffe-master/include/caffe/util/math_functions.hpp :
+ /njulk/caffe-master/include/caffe/util/mkl_alternate.hpp :
+ /njulk/caffe-master/include/caffe/layer.hpp :
+ /njulk/caffe-master/include/caffe/layer_factory.hpp :
+ /njulk/caffe-master/include/caffe/net.hpp :
+ /njulk/caffe-master/include/caffe/parallel.hpp :
+ /njulk/caffe-master/include/caffe/solver.hpp :
+ /njulk/caffe-master/include/caffe/solver_factory.hpp :
+ /njulk/caffe-master/include/caffe/util/benchmark.hpp :
+ /njulk/caffe-master/include/caffe/util/io.hpp :
+ /njulk/caffe-master/include/caffe/util/format.hpp :
+ /njulk/caffe-master/include/caffe/util/upgrade_proto.hpp :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TAppCommon/jpeg_save.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibEncoder/TEncRateCtrl.h :
  /njulk/HEVC/HM-16.12+SCM-8.3/build/linux/lib/TLibEncoder/../../../../source/Lib/TLibEncoder/../TLibCommon/CommonDef.h :
