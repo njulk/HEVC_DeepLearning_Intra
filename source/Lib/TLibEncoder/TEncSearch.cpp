@@ -3582,6 +3582,8 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 	if (ModeResult[0].second > 0.85) {
 		isSkipIntraMode = true;
 		numModesForFullRD = ModeResult.size();
+	//	numModesForFullRD = 1;
+	//	std::cout<<ModeResult.size()<<endl;
 	}
 
 #endif
@@ -3606,7 +3608,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
       const Bool bUseHadamard=pcCU->getCUTransquantBypass(0) == 0;
       m_pcRdCost->setDistParam(distParam, sps.getBitDepth(CHANNEL_TYPE_LUMA), piOrg, uiStride, piPred, uiStride, puRect.width, puRect.height, bUseHadamard);
       distParam.bApplyWeight = false;
-		  for (Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++)
+		  for (Int modeIdx = 0; modeIdx < numModesForFullRD; modeIdx++)
 		  {
 			  UInt       uiMode = (isSkipIntraMode==true)?stoi(ModeResult[modeIdx].first):modeIdx;
 			  Distortion uiSad = 0;
@@ -3630,11 +3632,9 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 #endif
 
 			  CandNum += xUpdateCandList(uiMode, cost, numModesForFullRD, uiRdModeList, CandCostList);
-			if(isSkipIntraMode)
-				break;
+			//if(isSkipIntraMode)
+			//	break;
 		  }
-	//cout<<"*****************************************"
-<<endl;
       if (m_pcEncCfg->getFastUDIUseMPMEnabled())
       {
         Int uiPreds[NUM_MOST_PROBABLE_MODES] = {-1, -1, -1};
