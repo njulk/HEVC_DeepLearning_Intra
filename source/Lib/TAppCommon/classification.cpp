@@ -179,11 +179,11 @@ void Classifier::Preprocess(const cv::Mat& img,
         == net_->input_blobs()[0]->cpu_data())
     << "Input channels are not wrapping the input layer of the network.";
 }
-Prediction getPrediction(Classifier* classifier,string file){
+std::vector<Prediction> getPrediction(Classifier* classifier,string file){
 //  std::cout << "---------- Prediction for "
   //          << file << " ----------" << std::endl;
   cv::Mat img = cv::imread(file, -1);
   CHECK(!img.empty()) << "Unable to decode image " << file;
   std::vector<Prediction> predictions = classifier->Classify(img);
-  return predictions[0];
+  return predictions;
 }
