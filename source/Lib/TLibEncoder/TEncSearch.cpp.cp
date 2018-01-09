@@ -3545,46 +3545,6 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
     initIntraPatternChType( tuRecurseWithPU, COMPONENT_Y, true DEBUG_STRING_PASS_INTO(sTemp2) );
 
     Bool doFastSearch = (numModesForFullRD != numModesAvailable);
-#ifdef DEEP_CLASSIFY
-	Bool isSkipIntraMode = false;
-	const Pel* org = pcOrgYuv->getAddr(COMPONENT_Y);
-	UInt CuWidth = pcOrgYuv->getWidth(COMPONENT_Y);
-	const char* filePath = "tmp.jpg";
-	unsigned char CuPixData[4096];
-	memset(CuPixData, 0, 4096);
-	for (int i = 0; i < pcOrgYuv->getHeight(COMPONENT_Y); i++) {
-		for (int j = 0; j < pcOrgYuv->getWidth(COMPONENT_Y); j++) {
-			CuPixData[i*CuWidth + j] = *(org + j);
-		}
-		org += pcOrgYuv->getStride(COMPONENT_Y);
-	}
-	GeneJpegFile(filePath, CuPixData, CuWidth, CuWidth, 1, 80);
-	Prediction ModeResult;
-	switch (CuWidth)
-	{
-	case 8:
-		ModeResult = getPrediction(classifier8, string(filePath));
-		break;
-	case 16:
-		ModeResult = getPrediction(classifier16, string(filePath));
-		break;
-	case 32:
-		ModeResult = getPrediction(classifier32, string(filePath));
-		break;
-	case 64:
-		ModeResult = getPrediction(classifier64, string(filePath));
-		break;
-	default:
-		break;
-	}
-	UInt uiPredictPUMode = stoi(ModeResult.first);
-	remove(filePath);
-	if (ModeResult.second > 0.85) {
-		isSkipIntraMode = true;
-	}
-
-#endif
-
     if (doFastSearch)
     {
       assert(numModesForFullRD < numModesAvailable);
@@ -3605,36 +3565,33 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
       const Bool bUseHadamard=pcCU->getCUTransquantBypass(0) == 0;
       m_pcRdCost->setDistParam(distParam, sps.getBitDepth(CHANNEL_TYPE_LUMA), piOrg, uiStride, piPred, uiStride, puRect.width, puRect.height, bUseHadamard);
       distParam.bApplyWeight = false;
-		
-	
-		  for (Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++)
-		  {
-			  UInt       uiMode = (isSkipIntraMode==true)?uiPredictPUMode:modeIdx;
-			  Distortion uiSad = 0;
+#ifndef DEEP_CLASSIFY
+      for( Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++ )
+      {
+        UInt       uiMode = modeIdx;
+        Distortion uiSad  = 0;
 
-			  const Bool bUseFilter = TComPrediction::filteringIntraReferenceSamples(COMPONENT_Y, uiMode, puRect.width, puRect.height, chFmt, sps.getSpsRangeExtension().getIntraSmoothingDisabledFlag());
+        const Bool bUseFilter=TComPrediction::filteringIntraReferenceSamples(COMPONENT_Y, uiMode, puRect.width, puRect.height, chFmt, sps.getSpsRangeExtension().getIntraSmoothingDisabledFlag());
 
-			  predIntraAng(COMPONENT_Y, uiMode, piOrg, uiStride, piPred, uiStride, tuRecurseWithPU, bUseFilter, TComPrediction::UseDPCMForFirstPassIntraEstimation(tuRecurseWithPU, uiMode));
+        predIntraAng( COMPONENT_Y, uiMode, piOrg, uiStride, piPred, uiStride, tuRecurseWithPU, bUseFilter, TComPrediction::UseDPCMForFirstPassIntraEstimation(tuRecurseWithPU, uiMode) );
 
-			  // use hadamard transform here
-			  uiSad += distParam.DistFunc(&distParam);
+        // use hadamard transform here
+        uiSad+=distParam.DistFunc(&distParam);
 
-			  UInt   iModeBits = 0;
+        UInt   iModeBits = 0;
 
-			  // NB xModeBitsIntra will not affect the mode for chroma that may have already been pre-estimated.
-			  iModeBits += xModeBitsIntra(pcCU, uiMode, uiPartOffset, uiDepth, CHANNEL_TYPE_LUMA);
+        // NB xModeBitsIntra will not affect the mode for chroma that may have already been pre-estimated.
+        iModeBits+=xModeBitsIntra( pcCU, uiMode, uiPartOffset, uiDepth, CHANNEL_TYPE_LUMA );
 
-			  Double cost = (Double)uiSad + (Double)iModeBits * sqrtLambdaForFirstPass;
+        Double cost      = (Double)uiSad + (Double)iModeBits * sqrtLambdaForFirstPass;
 
 #if DEBUG_INTRA_SEARCH_COSTS
-			  std::cout << "1st pass mode " << uiMode << " SAD = " << uiSad << ", mode bits = " << iModeBits << ", cost = " << cost << "\n";
+        std::cout << "1st pass mode " << uiMode << " SAD = " << uiSad << ", mode bits = " << iModeBits << ", cost = " << cost << "\n";
 #endif
 
-			  CandNum += xUpdateCandList(uiMode, cost, numModesForFullRD, uiRdModeList, CandCostList);
-			if(isSkipIntraMode)
-				break;
-		  }
-	//cout<<"*****************************************"<<endl;
+        CandNum += xUpdateCandList( uiMode, cost, numModesForFullRD, uiRdModeList, CandCostList );
+      }
+
       if (m_pcEncCfg->getFastUDIUseMPMEnabled())
       {
         Int uiPreds[NUM_MOST_PROBABLE_MODES] = {-1, -1, -1};
@@ -3659,7 +3616,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
           }
         }
       }
-	  
+#endif
     }
     else
     {
@@ -3688,11 +3645,54 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
     }
     for ( UInt uiMode = 0; uiMode < max; uiMode++)
 #else
-#endif
+#ifdef DEEP_CLASSIFY
+    for( UInt uiMode = 0; uiMode < 1; uiMode++ )
+#else
 	for (UInt uiMode = 0; uiMode < numModesForFullRD; uiMode++)
+#endif
+#endif
     {
+#ifdef DEEP_CLASSIFY
+		const Pel* org = pcOrgYuv->getAddr(COMPONENT_Y);
+		UInt CuWidth = pcOrgYuv->getWidth(COMPONENT_Y);
+		const char* filePath = "tmp.jpg";
+		unsigned char CuPixData[4096];
+		memset(CuPixData, 0, 4096);
+		for (int i = 0; i < pcOrgYuv->getHeight(COMPONENT_Y); i++) {
+			for (int j = 0; j < pcOrgYuv->getWidth(COMPONENT_Y); j++) {
+				CuPixData[i*CuWidth + j] = *(org + j);
+			}
+			org += pcOrgYuv->getStride(COMPONENT_Y);
+		}
+		GeneJpegFile(filePath, CuPixData, CuWidth, CuWidth, 1, 80);
+		Prediction ModeResult;
+		switch (CuWidth)
+		{
+		case 8:
+			ModeResult = getPrediction(classifier8, string(filePath));
+			break;
+		case 16:
+			ModeResult = getPrediction(classifier16, string(filePath));
+			break;
+		case 32:
+			ModeResult = getPrediction(classifier32, string(filePath));
+			break;
+		case 64:
+			ModeResult = getPrediction(classifier64, string(filePath));
+			break;
+		default:
+			break;
+		}
+		remove(filePath);
+		UInt uiPredictPUMode = stoi(ModeResult.first);
+		UInt uiOrgMode = uiPredictPUMode;
+#else
+	 // set luma prediction mode
 	  UInt uiOrgMode = uiRdModeList[uiMode];
+#endif
+ 
       pcCU->setIntraDirSubParts ( CHANNEL_TYPE_LUMA, uiOrgMode, uiPartOffset, uiDepth + uiInitTrDepth );
+
       DEBUG_STRING_NEW(sMode)
       // set context models
       m_pcRDGoOnSbacCoder->load( m_pppcRDSbacCoder[uiDepth][CI_CURR_BEST] );
