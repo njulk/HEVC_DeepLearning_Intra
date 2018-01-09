@@ -3559,7 +3559,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 		org += pcOrgYuv->getStride(COMPONENT_Y);
 	}
 	GeneJpegFile(filePath, CuPixData, CuWidth, CuWidth, 1, 80);
-	Prediction ModeResult;
+	vector<Prediction> ModeResult;
 	switch (CuWidth)
 	{
 	case 8:
@@ -3577,10 +3577,11 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 	default:
 		break;
 	}
-	UInt uiPredictPUMode = stoi(ModeResult.first);
+	//UInt uiPredictPUMode = stoi(ModeResult[0].first);
 	remove(filePath);
-	if (ModeResult.second > 0.85) {
+	if (ModeResult[0].second > 0.85) {
 		isSkipIntraMode = true;
+		numModesForFullRD = ModeResult.size();
 	}
 
 #endif
@@ -3605,11 +3606,9 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
       const Bool bUseHadamard=pcCU->getCUTransquantBypass(0) == 0;
       m_pcRdCost->setDistParam(distParam, sps.getBitDepth(CHANNEL_TYPE_LUMA), piOrg, uiStride, piPred, uiStride, puRect.width, puRect.height, bUseHadamard);
       distParam.bApplyWeight = false;
-		
-	
 		  for (Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++)
 		  {
-			  UInt       uiMode = (isSkipIntraMode==true)?uiPredictPUMode:modeIdx;
+			  UInt       uiMode = (isSkipIntraMode==true)?stoi(ModeResult[modeIdx].first):modeIdx;
 			  Distortion uiSad = 0;
 
 			  const Bool bUseFilter = TComPrediction::filteringIntraReferenceSamples(COMPONENT_Y, uiMode, puRect.width, puRect.height, chFmt, sps.getSpsRangeExtension().getIntraSmoothingDisabledFlag());
@@ -3634,7 +3633,8 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 			if(isSkipIntraMode)
 				break;
 		  }
-	//cout<<"*****************************************"<<endl;
+	//cout<<"*****************************************"
+<<endl;
       if (m_pcEncCfg->getFastUDIUseMPMEnabled())
       {
         Int uiPreds[NUM_MOST_PROBABLE_MODES] = {-1, -1, -1};

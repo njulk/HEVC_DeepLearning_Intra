@@ -43,6 +43,6 @@ private:
 };
 
 
-Prediction getPrediction(Classifier* classifier, string file);
+std::vector<Prediction> getPrediction(Classifier* classifier, string file);
 
 #endif // !DEEP_CLASSIFY
