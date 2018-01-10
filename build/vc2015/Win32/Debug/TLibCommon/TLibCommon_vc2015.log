@@ -1,8 +1,8 @@
 ﻿  libmd5.c
   TComYuv.cpp
   TComWeightPrediction.cpp
-  TComTU.cpp
   TComTrQuant.cpp
+  TComTU.cpp
   TComSlice.cpp
   TComSampleAdaptiveOffset.cpp
   TComRom.cpp

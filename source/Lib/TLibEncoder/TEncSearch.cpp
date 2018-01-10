@@ -3608,32 +3608,26 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
       const Bool bUseHadamard=pcCU->getCUTransquantBypass(0) == 0;
       m_pcRdCost->setDistParam(distParam, sps.getBitDepth(CHANNEL_TYPE_LUMA), piOrg, uiStride, piPred, uiStride, puRect.width, puRect.height, bUseHadamard);
       distParam.bApplyWeight = false;
-		  for (Int modeIdx = 0; modeIdx < numModesForFullRD; modeIdx++)
+#ifdef DEEP_CLASSIFY
+	  for (Int modeIdx = 0; modeIdx < numModesForFullRD; modeIdx++)
+#else
+	  for(Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++)
+#endif
 		  {
 			  UInt       uiMode = (isSkipIntraMode==true)?stoi(ModeResult[modeIdx].first):modeIdx;
 			  Distortion uiSad = 0;
-
 			  const Bool bUseFilter = TComPrediction::filteringIntraReferenceSamples(COMPONENT_Y, uiMode, puRect.width, puRect.height, chFmt, sps.getSpsRangeExtension().getIntraSmoothingDisabledFlag());
-
 			  predIntraAng(COMPONENT_Y, uiMode, piOrg, uiStride, piPred, uiStride, tuRecurseWithPU, bUseFilter, TComPrediction::UseDPCMForFirstPassIntraEstimation(tuRecurseWithPU, uiMode));
-
 			  // use hadamard transform here
 			  uiSad += distParam.DistFunc(&distParam);
-
 			  UInt   iModeBits = 0;
-
 			  // NB xModeBitsIntra will not affect the mode for chroma that may have already been pre-estimated.
 			  iModeBits += xModeBitsIntra(pcCU, uiMode, uiPartOffset, uiDepth, CHANNEL_TYPE_LUMA);
-
 			  Double cost = (Double)uiSad + (Double)iModeBits * sqrtLambdaForFirstPass;
-
 #if DEBUG_INTRA_SEARCH_COSTS
 			  std::cout << "1st pass mode " << uiMode << " SAD = " << uiSad << ", mode bits = " << iModeBits << ", cost = " << cost << "\n";
 #endif
-
 			  CandNum += xUpdateCandList(uiMode, cost, numModesForFullRD, uiRdModeList, CandCostList);
-			//if(isSkipIntraMode)
-			//	break;
 		  }
       if (m_pcEncCfg->getFastUDIUseMPMEnabled())
       {

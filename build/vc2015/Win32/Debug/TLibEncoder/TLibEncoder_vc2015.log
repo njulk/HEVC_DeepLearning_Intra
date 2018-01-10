@@ -1,27 +1,27 @@
 ﻿  WeightPredAnalysis.cpp
   TEncTop.cpp
-C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/jpeg_save.h(9): fatal error C1083: 无法打开包括文件: “jpeglib.h”: No such file or directory
+C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/classification.h(3): fatal error C1083: 无法打开包括文件: “caffe/caffe.hpp”: No such file or directory
   TEncSlice.cpp
-C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/jpeg_save.h(9): fatal error C1083: 无法打开包括文件: “jpeglib.h”: No such file or directory
+C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/classification.h(3): fatal error C1083: 无法打开包括文件: “caffe/caffe.hpp”: No such file or directory
   TEncSearch.cpp
-C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/jpeg_save.h(9): fatal error C1083: 无法打开包括文件: “jpeglib.h”: No such file or directory
+C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/classification.h(3): fatal error C1083: 无法打开包括文件: “caffe/caffe.hpp”: No such file or directory
   TEncSbac.cpp
-C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/jpeg_save.h(9): fatal error C1083: 无法打开包括文件: “jpeglib.h”: No such file or directory
+C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/classification.h(3): fatal error C1083: 无法打开包括文件: “caffe/caffe.hpp”: No such file or directory
   TEncSampleAdaptiveOffset.cpp
   TEncRateCtrl.cpp
   TEncPreanalyzer.cpp
   TEncPic.cpp
   TEncGOP.cpp
-C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/jpeg_save.h(9): fatal error C1083: 无法打开包括文件: “jpeglib.h”: No such file or directory
+C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/classification.h(3): fatal error C1083: 无法打开包括文件: “caffe/caffe.hpp”: No such file or directory
   TEncEntropy.cpp
   TEncCu.cpp
-C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/jpeg_save.h(9): fatal error C1083: 无法打开包括文件: “jpeglib.h”: No such file or directory
+C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/classification.h(3): fatal error C1083: 无法打开包括文件: “caffe/caffe.hpp”: No such file or directory
   TEncCavlc.cpp
   TEncBinCoderCABACCounter.cpp
   TEncBinCoderCABAC.cpp
   SyntaxElementWriter.cpp
   SEIwrite.cpp
   SEIEncoder.cpp
-C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/jpeg_save.h(9): fatal error C1083: 无法打开包括文件: “jpeglib.h”: No such file or directory
+C:\Users\Administrator\Desktop\HEVC_DeepLearning_Intra\source\Lib\TAppCommon/classification.h(3): fatal error C1083: 无法打开包括文件: “caffe/caffe.hpp”: No such file or directory
   NALwrite.cpp
   正在生成代码...
