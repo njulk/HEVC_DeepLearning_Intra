@@ -3579,7 +3579,7 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 	}
 	//UInt uiPredictPUMode = stoi(ModeResult[0].first);
 	remove(filePath);
-	if (ModeResult[0].second > 0.85) {
+	if (ModeResult[0].second > 0.85 && doFastSearch) {
 		isSkipIntraMode = true;
 		numModesForFullRD = ModeResult.size();
 	//	numModesForFullRD = 1;
@@ -3614,7 +3614,11 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 	  for(Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++)
 #endif
 		  {
+#ifdef DEEP_CLASSIFY
 			  UInt       uiMode = (isSkipIntraMode==true)?stoi(ModeResult[modeIdx].first):modeIdx;
+#else
+			  UInt       uiMode = modeIdx;
+#endif
 			  Distortion uiSad = 0;
 			  const Bool bUseFilter = TComPrediction::filteringIntraReferenceSamples(COMPONENT_Y, uiMode, puRect.width, puRect.height, chFmt, sps.getSpsRangeExtension().getIntraSmoothingDisabledFlag());
 			  predIntraAng(COMPONENT_Y, uiMode, piOrg, uiStride, piPred, uiStride, tuRecurseWithPU, bUseFilter, TComPrediction::UseDPCMForFirstPassIntraEstimation(tuRecurseWithPU, uiMode));
