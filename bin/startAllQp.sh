@@ -6,5 +6,7 @@ for((i=1;i<num;i++));
 do	
 	sed -i "s/${qp[i-1]}/${qp[i]}/" encoder_intra_main.cfg 
 	ps aux | grep "/TAppEncoderStatic" |grep -v grep| cut -c 9-15 | xargs kill -9
-	./TAppEncoderStatic -c  encoder_intra_main.cfg -c SlideEditing.cfg /njulk/HEVC/data/propose/${qp[i]}/	
+	rm -rf /njulk/HEVC/data/propose/SlideEditing/${qp[i]}/SlideEditing_1280x720_30.yuv_Result.txt
+	rm -rf /njulk/HEVC/data/propose/SlideEditing/${qp[i]}/result.txt
+	./TAppEncoderStatic -c  encoder_intra_main.cfg -c SlideEditing.cfg /njulk/HEVC/data/propose/SlideEditing/${qp[i]}/SlideEditing_1280x720_30.yuv_Result.txt | tee /njulk/HEVC/data/propose/SlideEditing/${qp[i]}/result.txt	
 done
