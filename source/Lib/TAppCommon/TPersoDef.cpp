@@ -132,6 +132,7 @@ Classifier* classifier8 = NULL;
 Classifier* classifier16 = NULL;
 Classifier* classifier32 = NULL;
 Classifier* classifier64 = NULL;
+void buildClassifier(const char*sequence) {
 	char deploy[100];
 	char caffemodel[100];
 	char meanproto[100];
