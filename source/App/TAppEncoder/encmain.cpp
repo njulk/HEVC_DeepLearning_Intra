@@ -66,12 +66,15 @@ int main(int argc, char* argv[])
 	// create application encoder class
 	cTAppEncTop.create();
 #ifdef DEEP_LEARNING
-        if(argc==5){
+        if(argc==6){
                 Mkdirs("");
         }
         else{
                 Mkdirs(argv[5]);
         }
+#endif
+#ifdef DEEP_CLASSIFY
+		buildClassifier(argv[6]);
 #endif
 	// parse configuration
 	try

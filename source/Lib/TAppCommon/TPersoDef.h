@@ -20,11 +20,12 @@ extern int IndexCurFrame;
 extern int NumSeperation;
 void freeData();
 #endif // DEEP_LEARNING
-#undef DEEP_CLASSIFY
+//#undef DEEP_CLASSIFY
 #ifdef DEEP_CLASSIFY
 extern Classifier* classifier8;
 extern Classifier* classifier16;
 extern Classifier* classifier32;
 extern Classifier* classifier64;
+void buildClassifier(const char* sequence);
 #endif // DEEP_CLASSIFY
 

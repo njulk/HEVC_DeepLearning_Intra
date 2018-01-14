@@ -132,4 +132,38 @@ Classifier* classifier8=new Classifier("/njulk/HEVC/sequences/prototxt/SlideEdit
 Classifier* classifier16= new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing16_deploy.prototxt","/njulk/HEVC/sequences/prototxt/16_iter_10000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_16x16_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
 Classifier* classifier32 = new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing32_deploy.prototxt","/njulk/HEVC/sequences/prototxt/32_iter_5000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_32x32_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
 Classifier* classifier64 = new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing64_deploy.prototxt","/njulk/HEVC/sequences/prototxt/64_iter_5000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_64x64_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
+void buildClassifier(const char*sequence) {
+	char deploy[100];
+	char caffemodel[100];
+	char meanproto[100];
+	char label[100];
+	int size[] = { 8,16,32,64 };
+	for (int i = 0; i < 4; i++) {
+		memset(deploy, 0, 100);
+		memset(caffemodel, 0, 100);
+		memset(meanproto, 0, 100);
+		memset(label, 0, 100);
+		sprintf(deploy, "%s%s/%s%d%s", "/njulk/HEVC/allModels/prototxt/", sequence, sequence,size[i], "_deploy.prototxt");
+		sprintf(caffemodel, "%s%s/%d%s", "/njulk/HEVC/allModels/caffemodel/", sequence, size[i], ".caffemodel");
+		sprintf(meanproto, "%s%s/%d%s", "/njulk/HEVC/allModels/mean/", sequence, size[i], "_mean.binaryproto");
+		sprintf(label, "%s","/njulk/HEVC/allModels/lmdb/label.txt");
+		switch (size[i])
+		{
+			case 8:
+				classifier8= new Classifier(deploy, caffemodel, meanproto, label);
+				break;
+			case 16:
+				classifier16 = new Classifier(deploy, caffemodel, meanproto, label);
+				break;
+			case 32:
+				classifier32 = new Classifier(deploy, caffemodel, meanproto, label);
+				break;
+			case 64:
+				classifier64 = new Classifier(deploy, caffemodel, meanproto, label);
+				break;
+			default:
+				break;
+		}
+	}
+}
 #endif
