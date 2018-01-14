@@ -128,11 +128,10 @@ void freeData() {
 
 
 #ifdef DEEP_CLASSIFY
-Classifier* classifier8=new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing8_deploy.prototxt","/njulk/HEVC/sequences/prototxt/8_iter_250000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_8x8_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
-Classifier* classifier16= new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing16_deploy.prototxt","/njulk/HEVC/sequences/prototxt/16_iter_10000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_16x16_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
-Classifier* classifier32 = new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing32_deploy.prototxt","/njulk/HEVC/sequences/prototxt/32_iter_5000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_32x32_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
-Classifier* classifier64 = new Classifier("/njulk/HEVC/sequences/prototxt/SlideEditing64_deploy.prototxt","/njulk/HEVC/sequences/prototxt/64_iter_5000.caffemodel","/njulk/HEVC/sequences/lmdb/SlideEditing_64x64_mean_train.binaryproto","/njulk/HEVC/sequences/lmdb/label.txt");
-void buildClassifier(const char*sequence) {
+Classifier* classifier8 = NULL;
+Classifier* classifier16 = NULL;
+Classifier* classifier32 = NULL;
+Classifier* classifier64 = NULL;
 	char deploy[100];
 	char caffemodel[100];
 	char meanproto[100];
