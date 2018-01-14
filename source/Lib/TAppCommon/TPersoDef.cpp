@@ -5,7 +5,7 @@ using namespace std;
 int IndexCurFrame = 0;
 const int num = 4;
 const int numTestTrain = 2;
-int NumSeperation = 30;
+int NumSeperation = 15;
 char**** INTRAMODE_DATA = new char***[numTestTrain];
 long long ***MODECOUNT = new long long**[numTestTrain];
 map<unsigned int, int> CuMap;
