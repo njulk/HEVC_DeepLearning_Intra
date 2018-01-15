@@ -67,12 +67,7 @@ int main(int argc, char* argv[])
 	cTAppEncTop.create();
 #ifdef DEEP_LEARNING
 #ifndef DEEP_CLASSIFY
-	if (argc == 6) {
-		Mkdirs("");
-}
-	else {
 		Mkdirs(argv[5]);
-	}
 #endif // !DEEP_CLASSIFY    
 #endif
 #ifdef DEEP_CLASSIFY
