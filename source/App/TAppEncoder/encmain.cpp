@@ -66,9 +66,7 @@ int main(int argc, char* argv[])
 	// create application encoder class
 	cTAppEncTop.create();
 #ifdef DEEP_LEARNING
-#ifndef DEEP_CLASSIFY
 		Mkdirs(argv[5]);
-#endif // !DEEP_CLASSIFY    
 #endif
 #ifdef DEEP_CLASSIFY
 		buildClassifier(argv[6]);

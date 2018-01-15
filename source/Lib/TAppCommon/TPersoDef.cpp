@@ -76,6 +76,7 @@ int createDirectory(const char* directoryPath, mode_t mode)
 
 void Mkdirs(const char* prefixFilepath) {
 	prefixPath = prefixFilepath;
+#ifndef DEEP_CLASSIFY
 	init(prefixPath);
 	int cuSize[num] = { 64,32,16,8 };
 	const char* testTrain[2] = { "train","test" };
@@ -98,6 +99,7 @@ void Mkdirs(const char* prefixFilepath) {
 			}
 		}
 	}
+#endif
 }
 
 void freeData() {

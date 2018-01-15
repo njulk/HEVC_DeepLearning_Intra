@@ -20,7 +20,7 @@ extern int IndexCurFrame;
 extern int NumSeperation;
 void freeData();
 #endif // DEEP_LEARNING
-#undef DEEP_CLASSIFY
+//#undef DEEP_CLASSIFY
 #ifdef DEEP_CLASSIFY
 extern Classifier* classifier8;
 extern Classifier* classifier16;
