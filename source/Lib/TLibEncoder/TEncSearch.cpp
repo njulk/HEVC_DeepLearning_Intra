@@ -3609,13 +3609,17 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
       m_pcRdCost->setDistParam(distParam, sps.getBitDepth(CHANNEL_TYPE_LUMA), piOrg, uiStride, piPred, uiStride, puRect.width, puRect.height, bUseHadamard);
       distParam.bApplyWeight = false;
 #ifdef DEEP_CLASSIFY
-	  for (Int modeIdx = 0; modeIdx < numModesForFullRD; modeIdx++)
+	  for (Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++)
 #else
 	  for(Int modeIdx = 0; modeIdx < numModesAvailable; modeIdx++)
 #endif
 		  {
 #ifdef DEEP_CLASSIFY
 			  UInt       uiMode = (isSkipIntraMode==true)?stoi(ModeResult[modeIdx].first):modeIdx;
+			  if(isSkipIntraMode==true && modeIdx==numModesForFullRD)
+			  {
+				break;
+			  }
 #else
 			  UInt       uiMode = modeIdx;
 #endif
