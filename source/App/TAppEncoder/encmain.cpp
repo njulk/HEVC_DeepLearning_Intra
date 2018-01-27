@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
 	// destroy application encoder class
 	cTAppEncTop.destroy();
 #ifdef DEEP_LEARNING
-	freeData();
+//	freeData();
 #endif
 	return 0;
 }

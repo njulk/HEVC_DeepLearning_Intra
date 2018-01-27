@@ -5,7 +5,7 @@ using namespace std;
 int IndexCurFrame = 0;
 const int num = 4;
 const int numTestTrain = 2;
-int NumSeperation = 15;
+int NumSeperation = 30;
 char**** INTRAMODE_DATA = new char***[numTestTrain];
 long long ***MODECOUNT = new long long**[numTestTrain];
 map<unsigned int, int> CuMap;
@@ -145,9 +145,11 @@ void buildClassifier(const char*sequence) {
 		memset(caffemodel, 0, 100);
 		memset(meanproto, 0, 100);
 		memset(label, 0, 100);
-		sprintf(deploy, "%s%s/%s%d%s", "/njulk/HEVC/allModels/prototxt/", sequence, sequence,size[i], "_deploy.prototxt");
-		sprintf(caffemodel, "%s%s/%d%s", "/njulk/HEVC/allModels/caffemodel/", sequence, size[i], ".caffemodel");
-		sprintf(meanproto, "%s%s/%d%s", "/njulk/HEVC/allModels/mean/", sequence, size[i], "_mean.binaryproto");
+		char* prefixDir="/home/istin/njulk/HEVC";//¿¿¿¿¿¿home/istin¿¿¿¿¿¿¿¿¿¿¿
+		//char* prefixDir="/njulk/HEVC/allModels";
+		sprintf(deploy, "%s%s%s/%s%d%s", prefixDir,"/prototxt/", sequence, sequence,size[i], "_deploy.prototxt");
+		sprintf(caffemodel, "%s%s%s/%d%s", prefixDir,"/caffemodel/", sequence, size[i], ".caffemodel");
+		sprintf(meanproto, "%s%s%s/%d%s", prefixDir,"/mean/", sequence, size[i], "_mean.binaryproto");
 		sprintf(label, "%s","/njulk/HEVC/allModels/lmdb/label.txt");
 		switch (size[i])
 		{

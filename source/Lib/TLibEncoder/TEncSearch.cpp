@@ -3581,7 +3581,9 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 	remove(filePath);
 	if (ModeResult[0].second > 0.85 && doFastSearch) {
 		isSkipIntraMode = true;
-		numModesForFullRD = ModeResult.size();
+		numModesForFullRD = ModeResult.size()+2;
+		ModeResult.push_back(make_pair("0",0));
+		ModeResult.push_back(make_pair("1",0));
 	//	numModesForFullRD = 1;
 	//	std::cout<<ModeResult.size()<<endl;
 	}
@@ -3615,11 +3617,11 @@ TEncSearch::estIntraPredLumaQT(TComDataCU* pcCU,
 #endif
 		  {
 #ifdef DEEP_CLASSIFY
-			  UInt       uiMode = (isSkipIntraMode==true)?stoi(ModeResult[modeIdx].first):modeIdx;
 			  if(isSkipIntraMode==true && modeIdx==numModesForFullRD)
 			  {
 				break;
 			  }
+			  UInt       uiMode = (isSkipIntraMode==true)?stoi(ModeResult[modeIdx].first):modeIdx;
 #else
 			  UInt       uiMode = modeIdx;
 #endif
