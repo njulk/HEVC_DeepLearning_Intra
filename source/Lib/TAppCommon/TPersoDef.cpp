@@ -145,8 +145,8 @@ void buildClassifier(const char*sequence) {
 		memset(caffemodel, 0, 100);
 		memset(meanproto, 0, 100);
 		memset(label, 0, 100);
-		char* prefixDir="/home/istin/njulk/HEVC";//¿¿¿¿¿¿home/istin¿¿¿¿¿¿¿¿¿¿¿
-		//char* prefixDir="/njulk/HEVC/allModels";
+		//char* prefixDir="/home/istin/njulk/HEVC";//¿¿¿¿¿¿home/istin¿¿¿¿¿¿¿¿¿¿¿
+		char* prefixDir="/njulk/HEVC/allModels";
 		sprintf(deploy, "%s%s%s/%s%d%s", prefixDir,"/prototxt/", sequence, sequence,size[i], "_deploy.prototxt");
 		sprintf(caffemodel, "%s%s%s/%d%s", prefixDir,"/caffemodel/", sequence, size[i], ".caffemodel");
 		sprintf(meanproto, "%s%s%s/%d%s", prefixDir,"/mean/", sequence, size[i], "_mean.binaryproto");
